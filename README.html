@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="API DOC DE DRAWSOMETHING" />
+	<title>README</title>
+	<style type="text/css">
+	body {
+		font-size: 1.3em;
+		}</style>
+</head>
+<body>
+<pre><b>======================================================================
+============================== DOC API ===============================
+======================================================================</b></pre>
+<b>API fait sous nodeJS donc suivant la librairie utiliser, il se peut que des problemes puissent venir, dans tout les cas veuillez m'informer si un probleme se presente</b>
+<b>TOUTES les réponses de l'API sont sous la forme d'un objet JSON :</b>
+<pre>{
+error : , // null si pas d'erreur, sinon erreur écrite
+data : ,// un objet contenant les données demandé
+token : //Donnée pendant la connexion A GARDER POUR FAIRE TOUTES LES REQUETES SAUF INSCRIPTION ET CONNEXION
+}
+</pre>
+<pre>
+========== Inscription ==========
+<b>http://37.187.20.82:9000/api.js/inscription</b>
+Envoyer post : {'login': 'bla', 'email' : nom@domaine.fr, 'password' : *****, 'genre': 'Femme', 'date': '01-02-1234', 'adresse': '8 rue du roxxor', 'ville': 'hook city', 'pays': 'Zimbabwe'}
+<b>L'adresse et la ville sont obligatoire mais peuvent etre vide car non obliger lors de l'inscription</b>
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre>
+========== Connexion ==========
+<b>http://37.187.20.82:9000/api.js/connexion</b>
+Envoyer post : {'login' : 'bla', 'password' : *****}
+<b>Renvoie si pas d'erreur : id, login, token</b>
+</pre>
+<pre>
+========== Info sur l'user ==========
+<b>http://37.187.20.82:9000/api.js/infoUser</b>
+Envoyer post : {'login' : 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789}
+<b>Renvoie si pas d'erreur : id, login, email, genre, date, adresse, ville, pays, avatar</b>
+</pre>
+<pre>
+========== Changer info de l'user ==========
+<b>http://37.187.20.82:9000/api.js/changeInfoUser</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'email' : nom@domaine.fr, 'password' : *****, 'genre': 'Femme', 'date': '01-02-1234', 'adresse': '8 rue du roxxor', 'ville': 'hook city', 'pays': 'Zimbabwe'}
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre>
+========== Changer avatar de l'user ==========
+<b>http://37.187.20.82:9000/api.js/changeUserAvatar</b>
+Envoyer post via formData (FAIRE PAREIL PAS DE JSON ET <input type="file" name="imageAvatar" id="imageAvatar"> SINON MARCHE PAS !!!) :
+<pre>
+		request = new XMLHttpRequest();
+		request.open("POST", "http://37.187.20.82:9999/api.js/changeUserAvatar", true);
+		formData = new FormData();
+		formData.append("login", localStorage.login);
+		formData.append("token", localStorage.token);
+		formData.append("imageAvatar", $('#imageAvatar')[0].files[0]);
+		request.send(formData);
+</pre>
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre><b>=============== POUR RECUPERER LES AVATAR METTRE DANS SRC http://api.ismaydogmus.fr/avatar/(value user avatar)</b></pre>
+<pre>
+========== Changer pass de l'user ==========
+<b>http://37.187.20.82:9000/api.js/changeUserPass</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'pass' ******}
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre><b>==================  ATTENTION IL Y A TROIS TYPE DE REPONSE POUR LES AMIS : NOT YET (PAS REPONDU), OUI ET NON ==================</b></pre>
+<pre>
+========== Faire une demande d'ami ==========
+<b>http://37.187.20.82:9000/api.js/ajoutAmi</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'ami' : 'lawl'}
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre>
+========== Recuperer ses demandes d'ami ==========
+<b>http://37.187.20.82:9000/api.js/userAmisSend</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789}
+<b>Renvoie si pas d'erreur : {"login" : 'lawl', 'reponse' : 'not yet'}</b>
+</pre>
+<pre>
+========== Recuperer les demande d'ami recut ==========
+<b>http://37.187.20.82:9000/api.js/userAmisReceiv</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789}
+<b>Renvoie si pas d'erreur : {"login" : 'lawl'}</b>
+</pre>
+<pre>
+========== Confirmer un ami ==========
+<b>http://37.187.20.82:9000/api.js/userValiderAmi</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'ami': 'lawl'}
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre>
+========== Refuser un ami ==========
+<b>http://37.187.20.82:9000/api.js/userRefuserAmi</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'ami': 'lawl'}
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre>
+========== Recuperer ses amis ==========
+<b>http://37.187.20.82:9000/api.js/userAmis</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789}
+<b>Renvoie si pas d'erreur : {"login" : 'lawl'}</b>
+</pre>
+<pre>
+========== Creer un mot ==========
+<b>http://37.187.20.82:9000/api.js/createMot</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'mot' : test, 'lettres' : azpdkopafjpojfez};
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre>
+========== Recuperer tous les mots ==========
+<b>http://37.187.20.82:9000/api.js/allMot</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789};
+<b>Renvoie si pas d'erreur : {'mot' : test}</b>
+</pre>
+<pre>
+========== Creer jeu ==========
+<b>http://37.187.20.82:9000/api.js/createGame</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'ami' : "lawl" : 'mot': test};
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre>
+========== Envoyer le dessin a deviner a son ami ==========
+<b>http://37.187.20.82:9000/api.js/playPartie</b>
+Envoyer post via formData (FAIRE PAREIL PAS DE JSON IMAGE VIA CANVA EN BASE64 SINON MARCHE PAS !!!) :
+<pre>
+		img = canvas.toDataURL("image/png");
+        img64 = img.replace('data:image/png;base64,');
+        img64 = img64.substr(9);
+        blob = new Blob([img64], { type: "image/png,base64"});
+        request = new XMLHttpRequest();
+        request.open("POST", "http://37.187.20.82:9999/api.js/playPartie", true);
+        formData = new FormData();
+        formData.append("login", localStorage.login);
+        formData.append("token", localStorage.token);
+        formData.append("ami", localStorage.ami);
+        formData.append("imagePartie", blob);
+        request.send(formData);
+</pre>
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+<pre><b>============  Pour les parties dans etat il y a ecrit soit "en cours", soit "perdu nom_du_login_qui_a_perdu", soit "gagner nom_du_login_qui_a_gagner"  ============</b></pre>
+<pre>
+========== Recuperer partie envoyer par user ==========
+<b>http://37.187.20.82:9000/api.js/userPartiesSend</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789};
+<b>Renvoie si pas d'erreur : {'login' : lawl, 'etat' : "en cours", 'id_mot' : 9999}</b>
+<pre>
+========== Recuperer partie recut par user ==========
+<b>http://37.187.20.82:9000/api.js/userPartiesReceiv</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789};
+<b>Renvoie si pas d'erreur : {'login' : lawl, 'etat' : "en cours", 'id_mot' : 9999}</b>
+</pre>
+<pre>
+========== Recuperer partie pour deviner mot ==========
+<b>http://37.187.20.82:9000/api.js/continueGame</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'ami' : lawl, 'idMot' : 9999};
+<b>Renvoie si pas d'erreur : {'image' : image en base64 sans le "data:image/jpeg;base64" (voir en dessous comment recuperer l'image), 'idPartie' : 9999}, {'idMot' : 9999, 'lettre': azertyuhg, 'mot': test}</b>
+tips pour recuperer l'image (via jquery : )
+<pre>
+	$.get("http://37.187.20.82/partie/" + response.data[0].image, function (imageBase64) {
+		$('#imageGuess').attr('src', 'data:image/jpeg;base64,' + imageBase64);
+	});
+	<b>Prennez le contenu de l'image en base64 et ajouter le debut commme montrer pour avoir l'image sur votre ecran !!!</b>
+</pre>
+</pre>
+</pre>
+<pre>
+========== Finir une artie en deviant le mot ou en perdant ( pres une minute sans envoyer de resultat ou en donnant mauvaise reponse) ==========
+<b>http://37.187.20.82:9000/api.js/finishGame</b>
+Envoyer post : {'login': 'bla', 'token' : abcdefghijklmnopqrstuvwxyz0123456789, 'ami' : lawl, 'idMot' : test, 'idPartie' 9999, 'reponse' ohjesaispas};
+<b>Renvoie si pas d'erreur : null</b>
+</pre>
+</body>
+</html>
