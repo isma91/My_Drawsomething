@@ -1,0 +1,50 @@
+body {
+	font-family: 'Abel', sans-serif;
+}
+
+#titre {
+	text-align: center;
+	font-family: 'Pacifico', cursive;
+}
+
+img#logo {
+	display: block;
+	width: 50%;
+	height: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img#logoMenu {
+	margin-top: -40px;
+	width: 100px;
+	height: 100px;
+}
+
+div.jumbotron h2 {
+	text-align: center;
+}
+
+h3#erreur {
+	text-align: center;
+	color: red;
+}
+
+img.valider,
+img.refuser {
+	width: 50px;
+	height: 50px;
+}
+
+#jouer,
+#guess {
+	display: none;
+}
+
+h2.center {
+	text-align: center;
+}
+
+div#image {
+	text-align: center;
+}
